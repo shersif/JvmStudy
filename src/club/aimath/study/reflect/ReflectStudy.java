@@ -1,9 +1,6 @@
 package club.aimath.study;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 import java.util.Arrays;
 
 public class ReflectStudy {
@@ -21,14 +18,34 @@ public class ReflectStudy {
         this.lastName = lastName;
     }
 
-    public double test(int a,double b){
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public double test(int a, double b){
         return a+b;
     }
 
 }
 
 class RunTest{
-    public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
+    public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException, InvocationTargetException {
         Class<ReflectStudy> reflectStudyClass = ReflectStudy.class;
         Field[] fields = reflectStudyClass.getDeclaredFields();
 
@@ -60,5 +77,12 @@ class RunTest{
         ageField.set(reflectStudy,19);
         System.out.printf("reflectStudy's name is %s %s and age is %d\n",lastNameField.get(reflectStudy),firstNameField.get(reflectStudy),ageField.get(reflectStudy));
 
+        Method[] methods = reflectStudyClass.getMethods();
+
+        for (Method m:methods){
+            if (m.getParameterCount()==0){
+                System.out.println("反射调用方法"+m.getName()+"返回值:"+m.invoke(reflectStudy));
+            }
+        }
     }
 }
