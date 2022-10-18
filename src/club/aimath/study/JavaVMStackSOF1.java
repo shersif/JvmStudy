@@ -2,6 +2,7 @@ package club.aimath.study;
 
 /**
  * 增加局部变量,测试栈溢出
+ * -Xss128k
  */
 public class JavaVMStackSOF1 {
     private static int stackLength=0;
