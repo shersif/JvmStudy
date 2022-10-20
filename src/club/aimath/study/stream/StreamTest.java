@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.function.BiConsumer;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -19,7 +21,10 @@ public class StreamTest {
 //        testFunction();
 //        test4();
 //        testStreamMap();
-        testHasStatus();
+//        testHasStatus();
+//        testReduce();
+//        testCollection();
+        testReturnTypeForLambda(StreamTest::testReturnType);
     }
 
     public static void  test1(){
@@ -153,6 +158,36 @@ public class StreamTest {
         Stream<String> names = Stream.of("zs", "ls", "ww", "zl");
         Stream<String> stringStream = names.map(StreamTest::methodForTestFunction);
         stringStream.forEach(System.out::println);
+    }
+
+    // 测试归约
+    public static void testReduce(){
+        Book a=new Book("三国演义", 12.1),b=new Book("西游记", 35.23),c=new Book("水浒传",22d);
+        Optional<Book> bookOptional = Stream.of(a, b, c).reduce((aa, bb) -> new Book(aa.getName() + "|" + bb.getName(), aa.getPrice() + bb.getPrice()));
+        System.out.println(bookOptional.get());
+        System.out.println("A:"+a+",B:"+b+",C:"+c);
+
+        OptionalInt max = IntStream.of(1, 5, 3, 4).reduce(Integer::max);
+        System.out.println("max in [1, 5, 3, 4] = " + max.getAsInt());
+
+        Stream<Integer> stream = List.of(1, 3, 2, 4, -3, 6, -5, 6).stream();
+        System.out.println("min in [1, 3, 2, 4, -3, 6, -5, 6] = " + stream.reduce(Integer::min).get());
+    }
+
+    // 测试收集器
+    public static void testCollection(){
+        Stream<Book> bookStream = Stream.of(new Book("三国演义", 12.1), new Book("西游记", 35.23), new Book("水浒传", 22d));
+        List<Book> collect = bookStream.collect(Collectors.toList());
+    }
+
+    //测试返回参数匹配,引用函数与接口函数的返回值不一致也可以进行匹配
+    public static void testReturnTypeForLambda(BiConsumer<Integer,String> consumer){
+        consumer.accept(12,"12");
+    }
+    public static int testReturnType(Integer i,String s){
+        boolean isEq=i==Integer.valueOf(s);
+        System.out.println("是否相等:"+isEq);
+        return isEq?1:0;
     }
 
     static class Book{
