@@ -1,4 +1,4 @@
-package club.aimath.study;
+package club.aimath.study.jvm;
 
 public class HashStudy {
     public static void main(String[] args) throws Exception {

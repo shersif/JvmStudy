@@ -1,4 +1,4 @@
-package club.aimath.study;
+package club.aimath.study.jvm;
 
 /**
  * 减少栈内存容量,测试栈溢出

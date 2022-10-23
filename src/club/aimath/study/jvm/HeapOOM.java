@@ -1,4 +1,4 @@
-package club.aimath.study;
+package club.aimath.study.jvm;
 
 import java.util.ArrayList;
 import java.util.List;

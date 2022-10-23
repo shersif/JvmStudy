@@ -9,8 +9,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static java.lang.Thread.sleep;
-
 public class StreamTest {
 
     private static final DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -23,8 +21,8 @@ public class StreamTest {
 //        testStreamMap();
 //        testHasStatus();
 //        testReduce();
-//        testCollection();
-        testReturnTypeForLambda(StreamTest::testReturnType);
+        testCollection();
+//        testReturnTypeForLambda(StreamTest::testReturnType);
     }
 
     public static void  test1(){
@@ -176,8 +174,31 @@ public class StreamTest {
 
     // 测试收集器
     public static void testCollection(){
-        Stream<Book> bookStream = Stream.of(new Book("三国演义", 12.1), new Book("西游记", 35.23), new Book("水浒传", 22d));
-        List<Book> collect = bookStream.collect(Collectors.toList());
+        Book a=new Book("三国演义", 12.1), b=new Book("西游记", 35.23),c=new Book("水浒传", 22d);
+        a.setAliasNames("sanguo","yanyi");
+        a.setType(1);
+        b.setAliasNames("xiyou","ji");
+        b.setType(1);
+        c.setAliasNames("shuihuo","zhuan");
+        c.setType(2);
+        Stream<Book> bookStream = Stream.of(a,b,c);
+//        List<Book> collect = bookStream.collect(Collectors.toList());
+//        System.out.println("collect = " + collect);
+//        Map<String, Book> collect = bookStream.collect(Collectors.toMap(Book::getName, book -> book));
+//        System.out.println("collect = " + collect);
+//        Map<String, Double> collect1 = bookStream.collect(Collectors.toMap(Book::getName, Book::getPrice));
+//        System.out.println("collect1 = " + collect1);
+//        Map<Integer, Set<Book>> collect2 = bookStream.collect(Collectors.groupingBy(Book::getType,Collectors.toSet()));
+//        System.out.println("collect2 = " + collect2);
+        // 分区方法
+//        Map<Boolean, List<Book>> collect3 = bookStream.collect(Collectors.partitioningBy(book -> book.getType() == 1));
+//        System.out.println("collect3 = " + collect3);
+
+//        Long count = bookStream.collect(Collectors.counting());
+//        System.out.println("count = " + count);
+
+        String collect4 = bookStream.map(Book::getName).collect(Collectors.joining(", "));
+        System.out.println("collect4 = " + collect4);
     }
 
     //测试返回参数匹配,引用函数与接口函数的返回值不一致也可以进行匹配
@@ -193,6 +214,10 @@ public class StreamTest {
     static class Book{
         private String name;
         private Double price;
+        
+        private int type;
+
+        private List<String> aliasNames;
 
         public Book(String name, Double price) {
             this.name = name;
@@ -215,11 +240,30 @@ public class StreamTest {
             this.price = price;
         }
 
+        public void setAliasNames(String... names){
+            this.aliasNames=List.of(names);
+        }
+
+        public List<String> getAliasNames() {
+            return aliasNames;
+        }
+
+        public int getType() {
+            return type;
+        }
+
+        public void setType(int type) {
+            this.type = type;
+        }
+
+
         @Override
         public String toString() {
             return "Book{" +
                     "name='" + name + '\'' +
-                    ", price='" + price + '\'' +
+                    ", price=" + price +
+                    ", type=" + type +
+                    ", aliasNames=" + aliasNames +
                     '}';
         }
     }

@@ -1,4 +1,4 @@
-package club.aimath.study;
+package club.aimath.study.jvm;
 
 /**
  * @Description 查看类编译后class文件

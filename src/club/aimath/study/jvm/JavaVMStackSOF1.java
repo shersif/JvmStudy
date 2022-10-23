@@ -1,4 +1,4 @@
-package club.aimath.study;
+package club.aimath.study.jvm;
 
 /**
  * 增加局部变量,测试栈溢出

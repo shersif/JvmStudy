@@ -1,4 +1,4 @@
-package club.aimath.study;
+package club.aimath.study.jvm;
 
 /**
  * @Description 非主动使用类字段演示

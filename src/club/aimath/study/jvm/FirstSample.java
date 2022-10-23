@@ -1,4 +1,4 @@
-package club.aimath.study;
+package club.aimath.study.jvm;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
