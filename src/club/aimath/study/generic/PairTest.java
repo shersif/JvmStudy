@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.function.Supplier;
 
 /**
  * @Description 泛型测试
@@ -36,6 +37,9 @@ public class PairTest{
         for (int i = 0; i < pairs.length; i++) {
             System.out.println("pairs["+i+"] = " + pairs[i]);
         }
+
+        Pair<String> stringPair = Pair.makePair(String::new);
+
     }
 
     public static <T> T[] addAll(Collection<T> collection,T... ts){
@@ -97,6 +101,10 @@ class Pair<T>{
     public void setSecond(T second) {
         System.out.println("fater received second = " + second);
         this.second = second;
+    }
+
+    public static <T> Pair<T> makePair(Supplier<T> constr){
+        return new Pair<>(constr.get(),constr.get());
     }
 
     @Override
