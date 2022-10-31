@@ -2,8 +2,8 @@ package club.aimath.study.generic;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.EmptyStackException;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.function.Supplier;
 
 /**
@@ -22,8 +22,7 @@ public class PairTest{
 //        String min = ArrayAlg.min(names);
 //        System.out.println("min = " + min);
 
-        DateInterval dateInterval = new DateInterval();
-        Pair<LocalDate> pair=dateInterval;
+        Pair<LocalDate> pair= new DateInterval();
         pair.setSecond(LocalDate.now());
         System.out.println("pair instanceof Pair = " + (pair instanceof Pair));
 
@@ -40,11 +39,17 @@ public class PairTest{
 
         Pair<String> stringPair = Pair.makePair(String::new);
 
+        Pair<A> aPair=new Pair<>(new B(),new A());
+        aPair.setFirst(new B());
+        A first = ((Pair<? extends A>) aPair).getFirst();
+        A second = ((Pair<? extends A>) aPair).getSecond();
+        System.out.println("first = " + first);
+        System.out.println("second = " + second);
     }
 
     public static <T> T[] addAll(Collection<T> collection,T... ts){
-        for (T t:ts
-             ) {
+        System.out.println("ts.getClass() = " + ts.getClass());
+        for (T t:ts) {
             collection.add(t);
         }
         return ts;
@@ -71,6 +76,7 @@ class ArrayAlg {
         }
         return samllest;
     }
+
 }
 
 
