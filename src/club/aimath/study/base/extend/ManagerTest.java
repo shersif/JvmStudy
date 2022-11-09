@@ -1,9 +1,8 @@
 package club.aimath.study.base.extend;
 
-import club.aimath.study.base.classAndObject.Employee;
-
 public class ManagerTest {
-    public static void main(String[] args) {
+
+    public static void test1( ){
         Manager boss=new Manager("Carl Cracker",80000,1987,12,15);
         boss.setBonus(5000);
 
@@ -16,5 +15,17 @@ public class ManagerTest {
         for (int i = 0; i < staff.length; i++) {
             System.out.println("staff["+i+"].getSalary() = " + staff[i].getSalary());
         }
+    }
+
+    /**
+     * ArrayStoreException
+     */
+    public static void test2(){
+        Manager[] managers=new Manager[3];
+        Employee[] employees=managers;
+        employees[0]=new Employee("Harry Hacker",50000,1989,10,1);
+    }
+    public static void main(String[] args) {
+        test2();
     }
 }

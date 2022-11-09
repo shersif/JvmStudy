@@ -1,7 +1,5 @@
 package club.aimath.study.base.extend;
 
-import club.aimath.study.base.classAndObject.Employee;
-
 /**
  * @Description 经理类
  * @Date 2022/11/8 23:32
