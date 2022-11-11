@@ -64,7 +64,7 @@ public class Employee extends Person{
 
     @Override
     public String toString() {
-        return "Employee{" +
+        return getClass().getSimpleName()+"{" +
                 "name='" + name + '\'' +
                 ", salary=" + salary +
                 ", hireDay=" + hireDay +
